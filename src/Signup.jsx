@@ -15,21 +15,12 @@ function Signup() {
     return re.test(email)
   }
 
-  const validatePassword = (password) => {
-    return password.length >= 6
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
 
     if (!validateEmail(email)) {
       setError('Please enter a valid email address.')
-      return
-    }
-
-    if (!validatePassword(password)) {
-      setError('Password must be at least 6 characters long.')
       return
     }
 
@@ -70,14 +61,13 @@ function Signup() {
       <form className="signup-form" onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
         {error && <p className="error-message">{error}</p>}
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Name (optional):</label>
         <input
           type="text"
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter your name"
-          required
         />
         <label htmlFor="email">Email:</label>
         <input
