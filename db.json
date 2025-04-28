@@ -275,6 +275,12 @@
       "id": "b",
       "name": "John",
       "email": "john@example.com"
+    },
+    {
+      "id": "ff06",
+      "name": "sudeis",
+      "email": "ahmedsudeis324@gmail.com",
+      "password": "123"
     }
   ],
   "watchlist": [
