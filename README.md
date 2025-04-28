@@ -1,3 +1,4 @@
+
 # React + Vite
 🎬 MovieMix
 MovieMix is a React-based movie listing application that fetches data from an API using json-server. This project aims to provide a simple interface to browse and filter through a collection of movies
@@ -83,3 +84,10 @@ Styling – User-friendly, responsive design.
 
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+# Movie-Mix-Project
+
+## Description
+
+This is a movie mix project that I made for my college course.
+
