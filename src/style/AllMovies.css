@@ -17,9 +17,10 @@ body {
 }
 
 .all-movies {
-  max-width: 1400px;
+  max-width: 3000px;
   margin: 0 auto;
   padding: 20px;
+  background-color: black;
 }
 
 h1 {
