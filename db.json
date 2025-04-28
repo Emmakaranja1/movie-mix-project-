@@ -177,6 +177,14 @@
       "rating": 5
     }
   ],
+  "users": [
+    {
+      "id": "d4f2",
+      "name": "sudeis",
+      "email": "ahmedsudeis324@gmail.com",
+      "password": "123456"
+    }
+  ],
   "watchlist": [
     {
       "id": "37",
