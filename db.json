@@ -5,23 +5,256 @@
       "title": "Inception",
       "genre": "Thriller",
       "releaseYear": "2010",
-      "image": "https://i.pinimg.com/236x/e2/dd/2d/e2dd2d4cacab4081ac8a16fd4bcaa69d.jpg",
+      "image": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
       "rating": 5
     },
     {
-      "id": "130f",
-      "title": "The Bee keeper",
+      "id": "10",
+      "title": "The Hunger Games: The Ballad of Songbirds and Snakes",
+      "genre": "Adventure",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/mBaXZ95R2OxueZhvQbcEWy2DqpS.jpg",
+      "rating": 5
+    },
+    {
+      "id": "11",
+      "title": "Wonka",
+      "genre": "Fantasy",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/qhb1qOilapbapxWQn9jtRCMwXJF.jpg",
+      "rating": 1
+    },
+    {
+      "id": "12",
+      "title": "Guardians of the Galaxy Vol. 3",
       "genre": "Action",
-      "releaseYear": "2024",
-      "image": "https://i.pinimg.com/474x/1c/bf/f7/1cbff7f73a765d071f6a4f4db9c2e324.jpg",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
+      "rating": 2
+    },
+    {
+      "id": "13",
+      "title": "Mission Impossible: Dead Reckoning",
+      "genre": "Action",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/NNxYkU70HPurnNCSiCjYAmacwm.jpg",
       "rating": 5
     },
     {
-      "id": "ecbd",
-      "title": "coco",
+      "id": "14",
+      "title": "Fast X",
+      "genre": "Action",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
+      "rating": 5
+    },
+    {
+      "id": "15",
+      "title": "The Flash",
+      "genre": "Superhero",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/rktDFPbfHfUbArZ6OOOKsXcv0Bm.jpg",
+      "rating": 5
+    },
+    {
+      "id": "16",
+      "title": "The Marvels",
+      "genre": "Superhero",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/Ag3D9qXjhJ2FUkrlJ0Cv1pgxqYQ.jpg",
+      "rating": 5
+    },
+    {
+      "id": "17",
+      "title": "Killers of the Flower Moon",
+      "genre": "Crime",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg",
+      "rating": 5
+    },
+    {
+      "id": "18",
+      "title": "Barbie",
+      "genre": "Comedy",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg",
+      "rating": 5
+    },
+    {
+      "id": "19",
+      "title": "Aquaman and the Lost Kingdom",
+      "genre": "Adventure",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg",
+      "rating": 5
+    },
+    {
+      "id": "20",
+      "title": "The Super Mario Bros. Movie",
       "genre": "Animation",
       "releaseYear": "2023",
-      "image": "https://i.pinimg.com/236x/74/2d/71/742d716a528929b0f2f80ae936d941e1.jpg"
+      "image": "https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg",
+      "rating": 5
+    },
+    {
+      "id": "21",
+      "title": "Elemental",
+      "genre": "Animation",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/4Y1WNkd88JXmGfhtWR7dmDAo1T2.jpg",
+      "rating": 5
+    },
+    {
+      "id": "22",
+      "title": "Wish",
+      "genre": "Animation",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/8QtDhh8mnGUEyrJsHrQjVIjk8qn.jpg",
+      "rating": 5
+    },
+    {
+      "id": "23",
+      "title": "Napoleon",
+      "genre": "Drama",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/jE5o7y9K6pZtWNNMEw3IdpHuncR.jpg",
+      "rating": 5
+    },
+    {
+      "id": "24",
+      "title": "Poor Things",
+      "genre": "Fantasy",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg",
+      "rating": 5
+    },
+    {
+      "id": "25",
+      "title": "The Creator",
+      "genre": "Sci-Fi",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/vBZ0qvaRxqEhZwl6LWmruJqWE8Z.jpg",
+      "rating": 5
+    },
+    {
+      "id": "26",
+      "title": "The Little Mermaid",
+      "genre": "Fantasy",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/ym1dxyOk4jFcSl4Q2zmRrA5BEEN.jpg",
+      "rating": 5
+    },
+    {
+      "id": "27",
+      "title": "Transformers: Rise of the Beasts",
+      "genre": "Action",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/gPbM0MK8CP8A174rmUwGsADNYKD.jpg",
+      "rating": 5
+    },
+    {
+      "id": "28",
+      "title": "John Wick: Chapter 4",
+      "genre": "Action",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+      "rating": 5
+    },
+    {
+      "id": "29",
+      "title": "Indiana Jones and the Dial of Destiny",
+      "genre": "Adventure",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/Af4bXE63pVsb2FtbW8tYYxSPfpj.jpg",
+      "rating": 5
+    },
+    {
+      "id": "30",
+      "title": "The Iron Claw",
+      "genre": "Drama",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/kKNQbelMuCv2YqNIioQI1IBtJoI.jpg",
+      "rating": 5
+    },
+    {
+      "id": "31",
+      "title": "Shazam! Fury of the Gods",
+      "genre": "Superhero",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/3GrRgt6CiLIUXUtoktcv1g2iwT5.jpg",
+      "rating": 5
+    },
+    {
+      "id": "32",
+      "title": "Creed III",
+      "genre": "Drama",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/cvsXj3I9Q2iyyIo95AecSd1tad7.jpg",
+      "rating": 5
+    },
+    {
+      "id": "33",
+      "title": "The Whale",
+      "genre": "Drama",
+      "releaseYear": "2022",
+      "image": "https://image.tmdb.org/t/p/w500/keWxYhIBV6k2xQX8r9Xkz0jU289.jpg",
+      "rating": 5
+    },
+    {
+      "id": "34",
+      "title": "The Fabelmans",
+      "genre": "Drama",
+      "releaseYear": "2022",
+      "image": "https://image.tmdb.org/t/p/w500/d2IywyOPS78vEnJvwVqkVRTiNC1.jpg",
+      "rating": 5
+    },
+    {
+      "id": "35",
+      "title": "Everything Everywhere All at Once",
+      "genre": "Adventure",
+      "releaseYear": "2022",
+      "image": "https://image.tmdb.org/t/p/w500/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg",
+      "rating": 5
+    },
+    {
+      "id": "36",
+      "title": "Top Gun: Maverick",
+      "genre": "Action",
+      "releaseYear": "2022",
+      "image": "https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
+      "rating": 5
+    },
+    {
+      "id": "37",
+      "title": "Nope",
+      "genre": "Horror",
+      "releaseYear": "2022",
+      "image": "https://image.tmdb.org/t/p/w500/AcKVlWaNVVVFQwro3nLXqPljcYA.jpg",
+      "rating": 5
+    },
+    {
+      "id": "38",
+      "title": "The Menu",
+      "genre": "Thriller",
+      "releaseYear": "2022",
+      "image": "https://image.tmdb.org/t/p/w500/fPtUgMcLIboqlTlPrq0bQpKK8eq.jpg",
+      "rating": 5
+    },
+    {
+      "id": "39",
+      "title": "The Banshees of Inisherin",
+      "genre": "Drama",
+      "releaseYear": "2022",
+      "image": "https://image.tmdb.org/t/p/w500/4yFG6cSPaCaPhyJ1vtGOtMD1lgh.jpg",
+      "rating": 5
+    },
+    {
+      "id": "40",
+      "title": "Glass Onion: A Knives Out Mystery",
+      "genre": "Mystery",
+      "releaseYear": "2022",
+      "image": "https://image.tmdb.org/t/p/w500/vDGr1YdrlfbU9wxTOdpf3zChmv9.jpg",
+      "rating": 5
     }
   ],
   "users": [
@@ -38,12 +271,57 @@
   ],
   "watchlist": [
     {
-      "id": "2da5",
-      "title": "coco",
-      "genre": "Animation",
-      "releaseYear": "2024",
-      "image": "https://i.pinimg.com/236x/74/2d/71/742d716a528929b0f2f80ae936d941e1.jpg"
+      "id": "37",
+      "title": "Nope",
+      "genre": "Horror",
+      "releaseYear": "2022",
+      "image": "https://image.tmdb.org/t/p/w500/AcKVlWaNVVVFQwro3nLXqPljcYA.jpg",
+      "rating": 5
+    },
+    {
+      "id": "10",
+      "title": "The Hunger Games: The Ballad of Songbirds and Snakes",
+      "genre": "Adventure",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/mBaXZ95R2OxueZhvQbcEWy2DqpS.jpg",
+      "rating": 5
+    },
+    {
+      "id": "12",
+      "title": "Guardians of the Galaxy Vol. 3",
+      "genre": "Action",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
+      "rating": 2
     }
   ],
-  "ratedFiveStars": []
+  "ratedFiveStars": [
+    {
+      "id": "11",
+      "title": "Wonka",
+      "genre": "Fantasy",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/qhb1qOilapbapxWQn9jtRCMwXJF.jpg",
+      "rating": 5,
+      "userRating": 5
+    },
+    {
+      "id": "11",
+      "title": "Wonka",
+      "genre": "Fantasy",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/qhb1qOilapbapxWQn9jtRCMwXJF.jpg",
+      "rating": 5,
+      "userRating": 5
+    },
+    {
+      "id": "11",
+      "title": "Wonka",
+      "genre": "Fantasy",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/qhb1qOilapbapxWQn9jtRCMwXJF.jpg",
+      "rating": 5,
+      "userRating": 5
+    }
+  ]
 }

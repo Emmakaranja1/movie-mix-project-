@@ -1,80 +1,99 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../style/Moviedetails.css";
 
 const Moviedetails = () => {
-  const { id } = useParams(); // Get the movie ID from the URL
-  const [movieDetails, setMovieDetails] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
+    const fetchMovie = async () => {
       try {
         const response = await fetch(`http://localhost:3001/movies/${id}`);
         if (!response.ok) {
           throw new Error("Movie not found");
         }
         const data = await response.json();
-        setMovieDetails(data);
+        setMovie(data);
       } catch (error) {
-        setError(error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchMovieDetails();
+    fetchMovie();
   }, [id]);
 
-  if (loading) {
-    return <div className="loading">Loading movie details...</div>;
-  }
+  const handleAddToWatchlist = async () => {
+    if (!movie) return;
 
-  if (error) {
-    return <div className="error">Error: {error.message}</div>;
-  }
+    try {
+      const response = await fetch("http://localhost:3001/watchlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(movie),
+      });
 
-  if (!movieDetails) {
-    return <div className="not-found">Movie not found</div>;
-  }
+      if (!response.ok) {
+        throw new Error("Failed to add to watchlist");
+      }
+
+      alert("Added to watchlist!");
+    } catch (error) {
+      console.error("Error adding to watchlist:", error);
+    }
+  };
+
+  if (loading) return <div className="loading-container">Loading...</div>;
+  if (error) return <div className="error-container">Error: {error}</div>;
 
   return (
-    <div className="movie-details">
-      <div className="back-button">
-        <Link to="/">← Back to Movies</Link>
-      </div>
+    <div className="movie-details-page">
+      <div
+        className="movie-backdrop"
+        style={{ backgroundImage: `url(${movie.image})` }}
+      ></div>
+      <div className="movie-details-container">
+        <button className="back-button" onClick={() => navigate(-1)}>
+          ← Back
+        </button>
 
-      <div className="movie-content">
-        <div className="movie-header">
-          <h1>{movieDetails.title}</h1>
+        <div className="movie-details-content">
+          <div className="movie-poster-container">
+            <img src={movie.image} alt={movie.title} className="movie-poster" />
+          </div>
 
-          <div className="movie-meta">
-            <div className="meta-item">
-              <span>Genre</span>
-              <p>{movieDetails.genre}</p>
+          <div className="movie-info-container">
+            <h1>{movie.title}</h1>
+            <div className="movie-meta">
+              <span>{movie.releaseYear}</span>
+              <span className="separator">•</span>
+              <span>{movie.genre}</span>
+              {movie.rating && (
+                <>
+                  <span className="separator">•</span>
+                  <span className="rating">{movie.rating}/10 ★</span>
+                </>
+              )}
             </div>
 
-            <div className="meta-item">
-              <span>Release Year</span>
-              <p>{movieDetails.releaseYear}</p>
-            </div>
+            <p className="movie-description">
+              {movie.description || "No description available."}
+            </p>
 
-            <div className="meta-item">
-              <span>Rating</span>
-              <p>{movieDetails.rating}/10</p>
+            <div className="action-buttons">
+              <button className="play-button">▶ Watch Now</button>
+              <button className="add-button" onClick={handleAddToWatchlist}>
+                + Add to Watchlist
+              </button>
             </div>
           </div>
-        </div>
-
-        <div className="rating-visual">
-          <div className="rating-bar">
-            <div
-              className="rating-fill"
-              style={{ width: `${(movieDetails.rating / 10) * 100}%` }}
-            ></div>
-          </div>
-          <p className="rating-label">Rating: {movieDetails.rating}/10</p>
         </div>
       </div>
     </div>

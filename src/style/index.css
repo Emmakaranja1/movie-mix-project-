@@ -1,3 +1,4 @@
+/* Root variables for consistent theming */
 :root {
   --color-primary: #646cff;
   --color-primary-hover: #535bf2;
@@ -5,11 +6,12 @@
   --color-background-dark: #121212;
   --color-text-light: rgba(255, 255, 255, 0.87);
   --color-text-dark: #213547;
-  --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-family-base: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --border-radius: 8px;
   --transition-speed: 0.25s;
 }
 
+/* Global styles */
 body {
   margin: 0;
   font-family: var(--font-family-base);
@@ -24,7 +26,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -45,6 +52,7 @@ a:focus {
   outline: none;
 }
 
+/* Navbar styles */
 .navbar {
   background: linear-gradient(90deg, #9506e7, #750697);
   padding: 1rem 2rem;
@@ -60,7 +68,8 @@ a:focus {
   color: var(--color-background-light);
   font-weight: 700;
   text-decoration: none;
-  transition: color var(--transition-speed), border-bottom var(--transition-speed);
+  transition: color var(--transition-speed),
+    border-bottom var(--transition-speed);
   padding-bottom: 0.2rem;
   cursor: pointer;
   border-bottom: 2px solid transparent;
@@ -73,6 +82,7 @@ a:focus {
   outline: none;
 }
 
+/* Button styles */
 button {
   background-color: var(--color-primary);
   color: var(--color-background-light);
@@ -93,7 +103,10 @@ button:focus {
   box-shadow: 0 6px 8px rgba(83, 91, 242, 0.6);
 }
 
-input, select, textarea {
+/* Form input styles */
+input,
+select,
+textarea {
   font-family: var(--font-family-base);
   font-size: 1rem;
   padding: 0.5em;
@@ -107,22 +120,28 @@ input, select, textarea {
   margin-bottom: 1rem;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   border-color: var(--color-primary);
   outline: none;
   box-shadow: 0 0 5px var(--color-primary);
 }
 
-.signup-container, .login-container, .profile-container {
+/* Signup, login, and profile containers */
+.signup-container,
+.login-container,
+.profile-container {
   max-width: 400px;
   margin: 2rem auto;
   background-color: #1a1a1a;
   padding: 2rem;
   border-radius: var(--border-radius);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
-.signup-form, .login-form {
+.signup-form,
+.login-form {
   display: flex;
   flex-direction: column;
 }
@@ -133,10 +152,11 @@ h2 {
   color: var(--color-primary);
 }
 
+/* Light mode styles */
 @media (prefers-color-scheme: light) {
   :root {
     --color-background-dark: #f9f9f9;
-    --color-text-light: #16d465;
+    --color-text-light: #333;
     --color-primary: #535bf2;
     --color-primary-hover: #646cff;
   }
@@ -146,19 +166,23 @@ h2 {
     color: var(--color-text-light);
   }
 
-  .signup-container, .login-container, .profile-container {
+  .signup-container,
+  .login-container,
+  .profile-container {
     background-color: #fff;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   }
 
-  input, select, textarea {
-    background-color: #9c0909;
-    color: var(--color-text-light);
+  input,
+  select,
+  textarea {
+    background-color: #fff;
+    color: var(--color-text-dark);
     border: 1px solid #ccc;
   }
 }
 
-
+/* Movie list styles */
 .movies-list {
   list-style: none;
   padding: 0;
@@ -180,92 +204,23 @@ h2 {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-.movie-image {
-  width: 50%;
-  height: 400px;
-  object-fit: cover;
-}
-
-.movie-details {
-  padding: 1rem;
-  text-align: center;
-}
-
-.movie-details h2 {
-  font-size: 1.5rem;
-  color:red;
-  margin-bottom: 0.5rem;
-}
-
-.movie-details p {
-  font-size: 1rem;
-  color: #666;
-  margin: 0.25rem 0;
-}
-
-
-
-
-
-.watchlist-movie-image {
-  width: 20%;
-  height: 200px;
-  object-fit: cover;
-  border-bottom: 1px solid #ddd;
-}
-
-
-.delete-button {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
-}
-
-.delete-button:hover {
-  background-color: #c0392b;
-
-}
-.rating-buttons button {
-  background-color: #f1c40f;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 0.5rem;
-  margin: 0.2rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.rating-buttons button:hover {
-  background-color: #d4ac0d;
-
-}
+/* Rating buttons */
 .rating-buttons {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
 
-.star-button {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: black;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.star-button.selected {
+.rating-buttons button {
+  background-color: #f1c40f;
   color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.star-button:hover {
-  transform: scale(1.2);
+.rating-buttons button:hover {
+  background-color: #d4ac0d;
 }
-

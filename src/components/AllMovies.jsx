@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../style/AllMovies.css";
 
 const AllMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -7,11 +8,12 @@ const AllMovies = () => {
     genre: "",
     releaseYear: "",
     image: "",
+    description: "",
   });
-
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch movies from db.json
     fetch("http://localhost:3001/movies")
       .then((response) => {
         if (!response.ok) {
@@ -19,8 +21,15 @@ const AllMovies = () => {
         }
         return response.json();
       })
-      .then((data) => setMovies(data))
-      .catch((error) => console.error("Error fetching movies:", error));
+      .then((data) => {
+        setMovies(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
+        setError(error.message);
+        setLoading(false);
+      });
   }, []);
 
   const handleInputChange = (e) => {
@@ -28,15 +37,24 @@ const AllMovies = () => {
     setNewMovie({ ...newMovie, [name]: value });
   };
 
-
   const handleAddMovie = () => {
-    // Add new movie to the backend
+    // Basic validation
+    if (
+      !newMovie.title ||
+      !newMovie.genre ||
+      !newMovie.releaseYear ||
+      !newMovie.image
+    ) {
+      alert("Please fill in all required fields");
+      return;
+    }
+
     fetch("http://localhost:3001/movies", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newMovie),
+      body: JSON.stringify({ ...newMovie, rating: 0 }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -45,50 +63,34 @@ const AllMovies = () => {
         return response.json();
       })
       .then((data) => {
-        setMovies([...movies, data]); 
-        setNewMovie({ title: "", genre: "", releaseYear: "", image: "" }); 
+        setMovies([...movies, data]);
+        setNewMovie({
+          title: "",
+          genre: "",
+          releaseYear: "",
+          image: "",
+          description: "",
+        });
       })
       .catch((error) => console.error("Error adding movie:", error));
   };
-    
-  const handleDeleteMovie = (id) => {
-    // Delete movie from the backend
-    fetch(`http://localhost:3001/movies/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to delete movie");
-        }
-        // Update the frontend by removing the deleted movie
-        setMovies(movies.filter((movie) => movie.id !== id));
-      })
-      .catch((error) => console.error("Error deleting movie:", error));
-  };
 
-  const handleLikeMovie = (movie) => {
-    // Add liked movie to the watchlist in the backend
-    fetch("http://localhost:3001/watchlist", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(movie),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to add movie to watchlist");
-        }
-        return response.json();
+  const handleDeleteMovie = (id) => {
+    if (window.confirm("Are you sure you want to delete this movie?")) {
+      fetch(`http://localhost:3001/movies/${id}`, {
+        method: "DELETE",
       })
-      .then(() => {
-        alert(`${movie.title} has been added to your watchlist!`);
-      })
-      .catch((error) => console.error("Error adding movie to watchlist:", error));
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to delete movie");
+          }
+          setMovies(movies.filter((movie) => movie.id !== id));
+        })
+        .catch((error) => console.error("Error deleting movie:", error));
+    }
   };
 
   const handleRateMovie = (id, rating) => {
-    // Update the movie's rating in the backend
     fetch(`http://localhost:3001/movies/${id}`, {
       method: "PATCH",
       headers: {
@@ -102,109 +104,153 @@ const AllMovies = () => {
         }
         return response.json();
       })
-      .then((updatedMovie) => {
-        // Update the frontend with the new rating
+      .then(() => {
         setMovies(
-          movies.map((movie) => (movie.id === updatedMovie.id ? updatedMovie : movie))
+          movies.map((movie) =>
+            movie.id === id ? { ...movie, rating } : movie
+          )
         );
 
-        // Add the rated movie to the watchlist if rated 5 stars
+        // If rated 5 stars, add to rated-five-stars list
         if (rating === 5) {
-          fetch("http://localhost:3001/ratedFiveStars", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedMovie),
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error(" Failed to add movie to RatedFiveStars");
-              }
-              return response.json();
+          const movieToAdd = movies.find((m) => m.id === id);
+          if (movieToAdd) {
+            fetch("http://localhost:3001/ratedFiveStars", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                ...movieToAdd,
+                rating: 5,
+                userRating: 5,
+              }),
             })
-            .then(() => {
-              alert(`${updatedMovie.title}  has been added to RatedFiveStars!`);
-            })
-            .catch((error) =>
-              console.error("Error adding movie to RatedFiveStars:", error)
-            );
+              .then((response) => {
+                if (response.ok) {
+                  console.log("Added to 5-star rated list");
+                }
+              })
+              .catch((error) =>
+                console.error("Error adding to 5-star list:", error)
+              );
+          }
         }
       })
       .catch((error) => console.error("Error rating movie:", error));
   };
+
+  const handleLikeMovie = (movie) => {
+    fetch("http://localhost:3001/watchlist", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(movie),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to add movie to watchlist");
+        }
+        alert(`"${movie.title}" added to your watchlist!`);
+      })
+      .catch((error) => console.error("Error adding to watchlist:", error));
+  };
+
+  if (loading) return <div className="loading-container">Loading...</div>;
+  if (error) return <div className="error-container">Error: {error}</div>;
+
   return (
-
-
-    <div>
+    <div className="all-movies">
       <h1>All Movies</h1>
+
       <div className="add-movie-form">
         <h2>Add New Movie</h2>
         <input
           type="text"
           name="title"
-          placeholder="Title"
+          placeholder="Title *"
           value={newMovie.title}
           onChange={handleInputChange}
+          required
         />
         <input
           type="text"
           name="genre"
-          placeholder="Genre"
+          placeholder="Genre *"
           value={newMovie.genre}
           onChange={handleInputChange}
+          required
         />
         <input
           type="number"
           name="releaseYear"
-          placeholder="Release Year"
+          placeholder="Release Year *"
           value={newMovie.releaseYear}
           onChange={handleInputChange}
+          required
         />
         <input
           type="text"
           name="image"
-          placeholder="Image URL"
+          placeholder="Image URL *"
           value={newMovie.image}
           onChange={handleInputChange}
+          required
+        />
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={newMovie.description}
+          onChange={handleInputChange}
+          rows="4"
         />
         <button onClick={handleAddMovie}>Add Movie</button>
       </div>
-      <ul className="movies-list">
+
+      <h2 className="section-title">Browse Movies</h2>
+      <div className="movie-list">
         {movies.map((movie) => (
-          <li key={movie.id}  >
-            <img src={movie.image} alt={movie.title} className="movie-image" />
-            <h2>{movie.title}</h2>
-            <p>Genre: {movie.genre}</p>
-            <p>Release Year: {movie.releaseYear}</p> 
-            <button
-              className="delete-button"
-              onClick={() => handleDeleteMovie(movie.id)}
-            >
-              Delete
-            </button>
-            <button
-              className="like-button"
-              onClick={() => handleLikeMovie(movie)}
-            >
-              Like
-            </button>  
-            <div className="rating-buttons">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <button
-                  key={star}
-                  onClick={() => handleRateMovie(movie.id, star)}
-                  className={`star-button ${
-                    movie.rating >= star ? "selected" : ""
-                  }`}
-                >
-                 ★ 
-                </button>
-              ))}
-            </div>                   
-        </li>
+          <div key={movie.id} className="movie-card">
+            <div className="movie-image">
+              <img src={movie.image} alt={movie.title} />
+            </div>
+            <div className="movie-info">
+              <h2>{movie.title}</h2>
+              <p>
+                {movie.genre} • {movie.releaseYear}
+              </p>
+              <div className="rating-buttons">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    onClick={() => handleRateMovie(movie.id, star)}
+                    className={`star-button ${
+                      movie.rating >= star ? "selected" : ""
+                    }`}
+                  >
+                    ★
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="movie-controls">
+              <button
+                className="like-button"
+                onClick={() => handleLikeMovie(movie)}
+              >
+                Watch Later
+              </button>
+              <button
+                className="delete-button"
+                onClick={() => handleDeleteMovie(movie.id)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

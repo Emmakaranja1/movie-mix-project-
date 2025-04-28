@@ -1,64 +1,89 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "../style/Watchlist.css";
 
 const Watchlist = () => {
   const [watchlist, setWatchlist] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch movies from db.json
-    fetch("http://localhost:3001/watchlist")
-      .then((response) => {
+    const fetchWatchlist = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/watchlist");
         if (!response.ok) {
-          throw new Error("Failed to fetch watchlist movies");
+          throw new Error("Failed to fetch watchlist");
         }
-        return response.json();
-    })
-    .then((data) => {
-      setWatchlist(data);
-    })
-    .catch((error) => console.error("Error fetching movies:", error));
-}, []);
+        const data = await response.json();
+        setWatchlist(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleDeleteFromWatchlist = (id) => {
-    // Delete movie from the watchlist in the backend
-    fetch(`http://localhost:3001/watchlist/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to delete movie from watchlist");
-        }
-      // Update the frontend by removing the deleted movie
-      setWatchlist((prevWatchlist) =>
-        prevWatchlist.filter((movie) => movie.id !== id)
-      );
-    })
-    .catch((error) => console.error("Error deleting movie from watchlist:", error));
-};
-  
+    fetchWatchlist();
+  }, []);
+
+  const removeFromWatchlist = async (movieId) => {
+    try {
+      await fetch(`http://localhost:3001/watchlist/${movieId}`, {
+        method: "DELETE",
+      });
+      setWatchlist(watchlist.filter((movie) => movie.id !== movieId));
+    } catch (error) {
+      console.error("Failed to remove movie from watchlist:", error);
+    }
+  };
+
+  if (loading) {
+    return <div className="loading-container">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="error-container">Error: {error}</div>;
+  }
+
   return (
-    <div>
-      <h1>Watchlist</h1>
-      <ul>
-        {watchlist.length > 0 ? (
-          watchlist.map((movie, index) => (
-            <li key={`${movie.id}-${index}`} >
-               <img src={movie.image} alt={movie.title} className="movie-image" />
-               <h2>{movie.title}</h2>
-               <p>Genre: {movie.genre}</p>
-              <p>Release Year: {movie.releaseYear}</p>
-              <p>Rating: {movie.rating}</p>
-               <button
-                className="delete-button"
-                onClick={() => handleDeleteFromWatchlist(movie.id)}
-              >
-                Delete
-              </button>
-            </li>
-          ))
-        ) : (
-          <p>No movies in your watchlist.</p>
-        )}
-      </ul>
+    <div className="watchlist-page">
+      <h1>My Watchlist</h1>
+      {watchlist.length === 0 ? (
+        <div className="empty-watchlist">
+          <p>Your watchlist is empty.</p>
+          <p>Add movies to your watchlist to watch later!</p>
+          <Link to="/all-movies" className="browse-button">
+            Browse Movies
+          </Link>
+        </div>
+      ) : (
+        <div className="movie-list">
+          {watchlist.map((movie) => (
+            <div key={movie.id} className="movie-card">
+              <div className="movie-image">
+                <img src={movie.image} alt={movie.title} />
+                <div className="overlay">
+                  <Link to={`/movie/${movie.id}`} className="view-button">
+                    View Details
+                  </Link>
+                </div>
+              </div>
+              <div className="movie-info">
+                <h2>{movie.title}</h2>
+                <p>
+                  {movie.genre} • {movie.releaseYear}
+                </p>
+                <button
+                  className="remove-button"
+                  onClick={() => removeFromWatchlist(movie.id)}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

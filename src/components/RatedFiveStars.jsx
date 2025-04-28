@@ -1,63 +1,98 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "../style/RatedFiveStars.css";
 
 const RatedFiveStars = () => {
   const [ratedMovies, setRatedMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch movies with a rating of 5 stars from db.json
-    fetch("http://localhost:3001/ratedFiveStars")
-      .then((response) => {
+    const fetchRatedMovies = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/ratedFiveStars");
         if (!response.ok) {
           throw new Error("Failed to fetch rated movies");
         }
-        return response.json();
-      })
-      .then((data) => {
-        setRatedMovies(data);
-      })
-      .catch((error) => console.error("Error fetching movies:", error));
+        const data = await response.json();
+        // Remove duplicates by ID
+        const uniqueMovies = [
+          ...new Map(data.map((movie) => [movie.id, movie])).values(),
+        ];
+        setRatedMovies(uniqueMovies);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRatedMovies();
   }, []);
 
+  const removeRatedMovie = async (id) => {
+    try {
+      // Find all instances of this movie in the ratedFiveStars endpoint
+      const response = await fetch("http://localhost:3001/ratedFiveStars");
+      const allRated = await response.json();
 
-  const handleDeleteRatedMovie = (id) => {
-    // Delete movie from the RatedFiveStars list in the backend
-    fetch(`http://localhost:3001/ratedFiveStars/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to delete rated movie");
-        }
-        // Update the frontend by removing the deleted movie
-        setRatedMovies(ratedMovies.filter((movie) => movie.id !== id));
-      })
-      .catch((error) => console.error("Error deleting rated movie:", error));
+      const toRemove = allRated.filter((m) => m.id === id);
+
+      // Delete each instance
+      for (const movie of toRemove) {
+        await fetch(`http://localhost:3001/ratedFiveStars/${movie.id}`, {
+          method: "DELETE",
+        });
+      }
+
+      setRatedMovies(ratedMovies.filter((movie) => movie.id !== id));
+    } catch (error) {
+      console.error("Failed to remove movie from rated list:", error);
+    }
   };
 
+  if (loading) return <div className="loading-container">Loading...</div>;
+  if (error) return <div className="error-container">Error: {error}</div>;
+
   return (
-    <div>
-      <h1>Rated 5 Stars</h1>
-      <ul>
-        {ratedMovies.length > 0 ? (
-          ratedMovies.map((movie) => (
-            <li key={movie.id}>
-              <img src={movie.image} alt={movie.title} className="movie-image" />
-              <h2>{movie.title}</h2>
-              <p>Genre: {movie.genre}</p>
-              <p>Release Year: {movie.releaseYear}</p>
-              <p>Rating: {movie.rating}</p>
-              <button
-                className="delete-button"
-                onClick={() => handleDeleteRatedMovie(movie.id)}
-              >
-                Delete
-              </button>
-            </li>
-          ))
-        ) : (
-          <p>No movies rated 5 stars found.</p>
-        )}
-      </ul>
+    <div className="rated-page">
+      <h1>Five-Star Rated Movies</h1>
+      {ratedMovies.length === 0 ? (
+        <div className="empty-ratings">
+          <p>You haven't rated any movies 5 stars yet.</p>
+          <Link to="/all-movies" className="browse-button">
+            Browse Movies
+          </Link>
+        </div>
+      ) : (
+        <div className="movie-list">
+          {ratedMovies.map((movie) => (
+            <div key={movie.id} className="movie-card">
+              <div className="movie-image">
+                <img src={movie.image} alt={movie.title} />
+                <div className="rating-badge">5★</div>
+                <div className="overlay">
+                  <Link to={`/movie/${movie.id}`} className="view-button">
+                    View Details
+                  </Link>
+                </div>
+              </div>
+              <div className="movie-info">
+                <h2>{movie.title}</h2>
+                <p>
+                  {movie.genre} • {movie.releaseYear}
+                </p>
+                <button
+                  className="remove-button"
+                  onClick={() => removeRatedMovie(movie.id)}
+                >
+                  Remove Rating
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

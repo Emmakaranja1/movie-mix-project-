@@ -2,21 +2,41 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../style/Homepage.css";
 
-
 const Homepage = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [featuredMovie, setFeaturedMovie] = useState(null);
+  const [moviesByGenre, setMoviesByGenre] = useState({});
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch("http://localhost:3002/movies");
+        const response = await fetch("http://localhost:3001/movies");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
         setMovies(data);
+
+        // Set the highest rated movie as featured
+        const highestRated = [...data].sort((a, b) => b.rating - a.rating)[0];
+        if (highestRated) {
+          setFeaturedMovie(highestRated);
+        }
+
+        // Organize movies by genre
+        const byGenre = {};
+        data.forEach((movie) => {
+          if (!movie.genre) return;
+
+          if (!byGenre[movie.genre]) {
+            byGenre[movie.genre] = [];
+          }
+          byGenre[movie.genre].push(movie);
+        });
+
+        setMoviesByGenre(byGenre);
       } catch (error) {
         setError(error);
       } finally {
@@ -27,15 +47,49 @@ const Homepage = () => {
     fetchMovies();
   }, []);
 
+  const renderMovieCard = (movie) => (
+    <Link to={`/movie/${movie.id}`} key={movie.id} className="movie-card">
+      <div className="movie-image">
+        <img src={movie.image} alt={movie.title} />
+      </div>
+      <div className="movie-info">
+        <h2>{movie.title}</h2>
+        <p>
+          {movie.genre} • {movie.releaseYear}
+        </p>
+        {movie.rating > 0 && <p className="rating">{movie.rating}/10 ★</p>}
+      </div>
+    </Link>
+  );
+
   if (loading) {
     return <div className="loading-container">Loading...</div>;
   }
 
   return (
     <div className="homepage">
-      <h1>Movie Mix</h1>
+      {featuredMovie && (
+        <div
+          className="featured-movie"
+          style={{ backgroundImage: `url(${featuredMovie.image})` }}
+        >
+          <div className="featured-content">
+            <h2>{featuredMovie.title}</h2>
+            <p>
+              {featuredMovie.description ||
+                `A ${featuredMovie.genre} movie from ${featuredMovie.releaseYear}`}
+            </p>
+            <div className="featured-buttons">
+              <Link to={`/movie/${featuredMovie.id}`}>
+                <button className="play-button">▶ Watch Now</button>
+              </Link>
+              <button className="info-button">+ My List</button>
+            </div>
+          </div>
+        </div>
+      )}
 
-      {/* Navigation links moved from navbar to homepage */}
+      <h1>Movie Mix</h1>
       <div className="homepage-nav">
         <Link to="/watchlist" className="nav-link">
           Watchlist
@@ -49,26 +103,42 @@ const Homepage = () => {
       </div>
 
       {error && <p className="error">Error: {error.message}</p>}
-      {movies.length === 0 && !error && <p>No movies available.</p>}
-      <div className="movie-list">
-        {movies.map((movie) => (
-          <Link to={`/movie/${movie.id}`} key={movie.id} className="movie-card">
-            <h2>{movie.title}</h2>
-            <p>
-              <span>Genre:</span> {movie.genre}
-            </p>
-            <p>
-              <span>Rating:</span> {movie.rating}/10
-            </p>
-            <p>
-              <span>Year:</span> {movie.releaseYear}
-            </p>
-          </Link>
-        ))}
+
+      {/* Display highest rated movies first */}
+      <h2 className="section-title">Featured Movies</h2>
+      <div className="movie-row">
+        <div className="movie-row-inner">
+          {movies
+            .filter((movie) => movie.rating >= 4)
+            .slice(0, 10)
+            .map(renderMovieCard)}
+        </div>
       </div>
+
+      {/* Display recent releases */}
+      <h2 className="section-title">Recent Releases</h2>
+      <div className="movie-row">
+        <div className="movie-row-inner">
+          {movies
+            .sort((a, b) => b.releaseYear - a.releaseYear)
+            .slice(0, 10)
+            .map(renderMovieCard)}
+        </div>
+      </div>
+
+      {/* Display movies by genre */}
+      {Object.keys(moviesByGenre).map((genre) => (
+        <div key={genre}>
+          <h2 className="section-title">{genre} Movies</h2>
+          <div className="movie-row">
+            <div className="movie-row-inner">
+              {moviesByGenre[genre].map(renderMovieCard)}
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
-
 };
 
 export default Homepage;
