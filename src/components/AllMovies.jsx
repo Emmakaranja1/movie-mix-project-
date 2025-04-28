@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../style/AllMovies.css";
 
+
 const AllMovies = () => {
   const [movies, setMovies] = useState([]);
   const [newMovie, setNewMovie] = useState({
