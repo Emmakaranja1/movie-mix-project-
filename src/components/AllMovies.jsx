@@ -12,7 +12,7 @@ const AllMovies = () => {
 
   useEffect(() => {
     // Fetch movies from db.json
-    fetch("http://localhost:3002/movies")
+    fetch("http://localhost:3001/movies")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch movies");
@@ -31,7 +31,7 @@ const AllMovies = () => {
 
   const handleAddMovie = () => {
     // Add new movie to the backend
-    fetch("http://localhost:3002/movies", {
+    fetch("http://localhost:3001/movies", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const AllMovies = () => {
     
   const handleDeleteMovie = (id) => {
     // Delete movie from the backend
-    fetch(`http://localhost:3002/movies/${id}`, {
+    fetch(`http://localhost:3001/movies/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -68,7 +68,7 @@ const AllMovies = () => {
 
   const handleLikeMovie = (movie) => {
     // Add liked movie to the watchlist in the backend
-    fetch("http://localhost:3002/watchlist", {
+    fetch("http://localhost:3001/watchlist", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const AllMovies = () => {
 
   const handleRateMovie = (id, rating) => {
     // Update the movie's rating in the backend
-    fetch(`http://localhost:3002/movies/${id}`, {
+    fetch(`http://localhost:3001/movies/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +110,7 @@ const AllMovies = () => {
 
         // Add the rated movie to the watchlist if rated 5 stars
         if (rating === 5) {
-          fetch("http://localhost:3002/ratedFiveStars", {
+          fetch("http://localhost:3001/ratedFiveStars", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

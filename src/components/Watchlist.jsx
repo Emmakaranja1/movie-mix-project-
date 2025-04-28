@@ -5,7 +5,7 @@ const Watchlist = () => {
 
   useEffect(() => {
     // Fetch movies from db.json
-    fetch("http://localhost:3002/watchlist")
+    fetch("http://localhost:3001/watchlist")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch watchlist movies");
@@ -20,7 +20,7 @@ const Watchlist = () => {
 
   const handleDeleteFromWatchlist = (id) => {
     // Delete movie from the watchlist in the backend
-    fetch(`http://localhost:3002/watchlist/${id}`, {
+    fetch(`http://localhost:3001/watchlist/${id}`, {
       method: "DELETE",
     })
       .then((response) => {

@@ -5,7 +5,7 @@ const RatedFiveStars = () => {
 
   useEffect(() => {
     // Fetch movies with a rating of 5 stars from db.json
-    fetch("http://localhost:3002/ratedFiveStars")
+    fetch("http://localhost:3001/ratedFiveStars")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch rated movies");
@@ -21,7 +21,7 @@ const RatedFiveStars = () => {
 
   const handleDeleteRatedMovie = (id) => {
     // Delete movie from the RatedFiveStars list in the backend
-    fetch(`http://localhost:3002/ratedFiveStars/${id}`, {
+    fetch(`http://localhost:3001/ratedFiveStars/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
