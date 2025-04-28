@@ -1,5 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Profile from "./Profile.jsx";
 import Login from "./Login.jsx";
@@ -11,25 +10,20 @@ import Watchlist from "./components/Watchlist";
 import RatedFiveStars from "./components/RatedFiveStars";
 import Moviedetails from "./components/Moviedetails";
 
+
 function AuthRedirect() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const savedAccount = localStorage.getItem("account");
-    if (savedAccount) {
-      navigate("/login");
-    } else {
-      navigate("/signup");
-    }
-  }, [navigate]);
-
-  return null; // or a loading spinner if desired
+  const savedAccount = localStorage.getItem("account");
+  if (savedAccount) {
+    return <Navigate to="/login" replace />;
+  } else {
+    return <Navigate to="/signup" replace />;
+  }
 }
+
 
 function PrivateRoute({ children }) {
   const savedAccount = localStorage.getItem("account");
   if (!savedAccount) {
-    // Redirect to signup if no account saved
     return <Navigate to="/signup" replace />;
   }
   return children;
@@ -46,7 +40,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route
-            path="/Homepage"
+            path="/homepage"
             element={
               <PrivateRoute>
                 <Homepage />
