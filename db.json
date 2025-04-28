@@ -1,0 +1,49 @@
+{
+  "movies": [
+    {
+      "id": "1",
+      "title": "Inception",
+      "genre": "Thriller",
+      "releaseYear": "2010",
+      "image": "https://i.pinimg.com/236x/e2/dd/2d/e2dd2d4cacab4081ac8a16fd4bcaa69d.jpg",
+      "rating": 5
+    },
+    {
+      "id": "130f",
+      "title": "The Bee keeper",
+      "genre": "Action",
+      "releaseYear": "2024",
+      "image": "https://i.pinimg.com/474x/1c/bf/f7/1cbff7f73a765d071f6a4f4db9c2e324.jpg",
+      "rating": 5
+    },
+    {
+      "id": "ecbd",
+      "title": "coco",
+      "genre": "Animation",
+      "releaseYear": "2023",
+      "image": "https://i.pinimg.com/236x/74/2d/71/742d716a528929b0f2f80ae936d941e1.jpg"
+    }
+  ],
+  "users": [
+    {
+      "id": "a",
+      "name": "Emma",
+      "email": "emma@example.com"
+    },
+    {
+      "id": "b",
+      "name": "John",
+      "email": "john@example.com"
+    }
+  ],
+  "watchlist": [
+    {
+      "id": "2da5",
+      "title": "coco",
+      "genre": "Animation",
+      "releaseYear": "2024",
+      "image": "https://i.pinimg.com/236x/74/2d/71/742d716a528929b0f2f80ae936d941e1.jpg"
+    }
+  ],
+  "ratedFiveStars": []
+}
