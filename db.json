@@ -30,7 +30,7 @@
       "genre": "Action",
       "releaseYear": "2023",
       "image": "https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
-      "rating": 2
+      "rating": 5
     },
     {
       "id": "13",
@@ -38,7 +38,7 @@
       "genre": "Action",
       "releaseYear": "2023",
       "image": "https://image.tmdb.org/t/p/w500/NNxYkU70HPurnNCSiCjYAmacwm.jpg",
-      "rating": 5
+      "rating": 2
     },
     {
       "id": "14",
@@ -320,6 +320,33 @@
       "genre": "Fantasy",
       "releaseYear": "2023",
       "image": "https://image.tmdb.org/t/p/w500/qhb1qOilapbapxWQn9jtRCMwXJF.jpg",
+      "rating": 5,
+      "userRating": 5
+    },
+    {
+      "id": "12",
+      "title": "Guardians of the Galaxy Vol. 3",
+      "genre": "Action",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
+      "rating": 5,
+      "userRating": 5
+    },
+    {
+      "id": "12",
+      "title": "Guardians of the Galaxy Vol. 3",
+      "genre": "Action",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
+      "rating": 5,
+      "userRating": 5
+    },
+    {
+      "id": "12",
+      "title": "Guardians of the Galaxy Vol. 3",
+      "genre": "Action",
+      "releaseYear": "2023",
+      "image": "https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
       "rating": 5,
       "userRating": 5
     }
