@@ -7,22 +7,45 @@ function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+
+  const validateEmail = (email) => {
+    const re = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
+    return re.test(email)
+  }
+
+  const validatePassword = (password) => {
+    return password.length >= 6
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
 
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address.')
+      return
+    }
+
+    if (!validatePassword(password)) {
+      setError('Password must be at least 6 characters long.')
+      return
+    }
+
+    setLoading(true)
+
     try {
-      const response = await fetch('http://localhost:3002/users?email=' + encodeURIComponent(email))
+      const response = await fetch('http://localhost:3001/users?email=' + encodeURIComponent(email))
       const existingUsers = await response.json()
       if (existingUsers.length > 0) {
         setError('Email already exists')
+        setLoading(false)
         return
       }
 
       const newUser = { name, email, password }
-      const postResponse = await fetch('http://localhost:3002/users', {
+      const postResponse = await fetch('http://localhost:3001/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser),
@@ -30,13 +53,15 @@ function Signup() {
 
       if (postResponse.ok) {
         localStorage.setItem('account', JSON.stringify(newUser))
-        navigate('/login')
+        navigate('/homepage')
       } else {
         setError('Failed to sign up. Please try again later.')
       }
     } catch (err) {
       setError('Failed to sign up. Please try again later.')
       console.error(err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -72,7 +97,9 @@ function Signup() {
           placeholder="Enter your password"
           required
         />
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Signing Up...' : 'Sign Up'}
+        </button>
       </form>
     </div>
   )
