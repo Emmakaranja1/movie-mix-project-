@@ -1,0 +1,205 @@
+:root {
+  --primary-color: #e50914;
+  --secondary-color: #141414;
+  --text-color: #ffffff;
+  --background-color: #141414;
+  --card-background: #181818;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* General layout */
+.movie-details-page {
+  background-color: var(--background-color);
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+.movie-backdrop {
+  height: 60vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.movie-backdrop::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 20, 20, 0.2) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+}
+
+.movie-details-container {
+  position: relative;
+  padding: 0 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  margin-top: -150px;
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  z-index: 10;
+  position: relative;
+}
+
+.back-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.movie-details-content {
+  display: flex;
+  gap: 30px;
+  position: relative;
+  z-index: 5;
+}
+
+.movie-poster-container {
+  flex: 0 0 300px;
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+}
+
+.movie-info-container {
+  flex: 1;
+}
+
+.movie-info-container h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.movie-meta {
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.separator {
+  margin: 0 10px;
+}
+
+.rating {
+  color: gold;
+}
+
+.movie-description {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.play-button,
+.add-button {
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.play-button {
+  background-color: white;
+  color: black;
+}
+
+.play-button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.add-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.add-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Loading state */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: var(--text-color);
+}
+
+.loading-container::after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.error-container {
+  padding: 30px;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .movie-details-content {
+    flex-direction: column;
+  }
+
+  .movie-poster-container {
+    flex: 0 0 auto;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
+  .movie-info-container h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .movie-meta {
+    text-align: center;
+  }
+
+  .action-buttons {
+    justify-content: center;
+  }
+}

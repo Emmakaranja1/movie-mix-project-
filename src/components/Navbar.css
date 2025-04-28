@@ -1,0 +1,61 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #1f2937; 
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    
+  }
+  
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+  
+  .nav-links li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links li:hover {
+    color: #facc15; 
+  }
+  
+  .nav-links img {
+    height: 20px;
+  }
+  
+  
+  
+  
+  .search-bar input {
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 0.9rem;
+    width: 160px;
+  }
+  
+  .search-bar input::placeholder {
+    color: #9ca3af;
+  }
+  
+  .search-bar img {
+    height: 30px;
+    opacity: 50;
+  }
+  
