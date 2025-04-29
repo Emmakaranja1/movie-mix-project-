@@ -129,27 +129,84 @@ textarea:focus {
 }
 
 /* Signup, login, and profile containers */
-.signup-container,
 .login-container,
-.profile-container {
+.signup-container {
   max-width: 400px;
-  margin: 2rem auto;
-  background-color: #1a1a1a;
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 8px;
+  background-color: var(--card-background, #181818);
+  color: var(--text-color, #ffffff);
+  box-shadow: var(--card-shadow, 0 4px 20px rgba(0, 0, 0, 0.6));
 }
 
-.signup-form,
-.login-form {
+.login-form,
+.signup-form {
   display: flex;
   flex-direction: column;
 }
 
-h2 {
+.login-form h2,
+.signup-form h2 {
+  margin-bottom: 20px;
   text-align: center;
-  margin-bottom: 1.5rem;
-  color: var(--color-primary);
+  color: var(--text-color, #ffffff);
+}
+
+.error-message {
+  color: var(--primary-color, #e50914);
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: rgba(229, 9, 20, 0.1);
+  border-radius: 4px;
+}
+
+.login-form label,
+.signup-form label {
+  margin-bottom: 6px;
+}
+
+.login-form input,
+.signup-form input {
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background-color: #333;
+  color: white;
+}
+
+.login-form button,
+.signup-form button {
+  padding: 12px;
+  background-color: var(--primary-color, #e50914);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover,
+.signup-form button:hover {
+  background-color: #f40612;
+}
+
+.signup-link,
+.login-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.link {
+  color: var(--primary-color, #e50914);
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 /* Light mode styles */
