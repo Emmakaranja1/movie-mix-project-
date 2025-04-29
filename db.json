@@ -16,15 +16,17 @@
       "genre": "Adventure",
       "releaseYear": "2023",
       "image": "https://image.tmdb.org/t/p/w500/mBaXZ95R2OxueZhvQbcEWy2DqpS.jpg",
-
+      "rating": 5
+    },
+    {
       "id": "9",
       "title": "Black Panther: Wakanda Forever",
       "genre": "Action",
       "releaseYear": "2022",
       "image": "https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg",
-
       "rating": 5
     },
+    
     {
       "id": "11",
       "title": "Wonka",
@@ -329,7 +331,5 @@
       "rating": 5,
       "userRating": 5
     }
-  ],
-
-  "ratedFiveStars": []
+  ]
 }
