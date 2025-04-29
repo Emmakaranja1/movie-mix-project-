@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useMovies } from "../context/MovieContext";
 import "../style/Moviedetails.css";
+import { API_BASE_URL } from "../services/api";
 
 const Moviedetails = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const Moviedetails = () => {
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/movies/${id}`);
+        const response = await fetch(`${API_BASE_URL}/movies/${id}`);
         if (!response.ok) {
           throw new Error("Movie not found");
         }

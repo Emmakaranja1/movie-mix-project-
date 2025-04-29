@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
+import { API_BASE_URL } from "../services/api";
 
 // Create a context
 const MovieContext = createContext();
@@ -19,7 +20,7 @@ export const MovieProvider = ({ children }) => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch("http://localhost:3001/movies");
+        const response = await fetch(`${API_BASE_URL}/movies`);
         if (!response.ok) {
           throw new Error("Failed to fetch movies");
         }
@@ -40,7 +41,7 @@ export const MovieProvider = ({ children }) => {
   useEffect(() => {
     const fetchWatchlist = async () => {
       try {
-        const response = await fetch("http://localhost:3001/watchlist");
+        const response = await fetch(`${API_BASE_URL}/watchlist`);
         if (!response.ok) {
           throw new Error("Failed to fetch watchlist");
         }
@@ -58,7 +59,7 @@ export const MovieProvider = ({ children }) => {
   useEffect(() => {
     const fetchRatedFiveStars = async () => {
       try {
-        const response = await fetch("http://localhost:3001/ratedFiveStars");
+        const response = await fetch(`${API_BASE_URL}/ratedFiveStars`);
         if (!response.ok) {
           throw new Error("Failed to fetch rated movies");
         }
@@ -75,7 +76,7 @@ export const MovieProvider = ({ children }) => {
   // Add movie to watchlist
   const addToWatchlist = async (movie) => {
     try {
-      const response = await fetch("http://localhost:3001/watchlist", {
+      const response = await fetch(`${API_BASE_URL}/watchlist`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +100,7 @@ export const MovieProvider = ({ children }) => {
   // Remove from watchlist
   const removeFromWatchlist = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/watchlist/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/watchlist/${id}`, {
         method: "DELETE",
       });
 
@@ -118,7 +119,7 @@ export const MovieProvider = ({ children }) => {
   // Rate a movie
   const rateMovie = async (id, rating) => {
     try {
-      const response = await fetch(`http://localhost:3001/movies/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/movies/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -139,19 +140,16 @@ export const MovieProvider = ({ children }) => {
       if (rating === 5) {
         const movieToAdd = movies.find((m) => m.id === id);
         if (movieToAdd) {
-          const ratedResponse = await fetch(
-            "http://localhost:3001/ratedFiveStars",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                ...movieToAdd,
-                rating: 5,
-              }),
-            }
-          );
+          const ratedResponse = await fetch(`${API_BASE_URL}/ratedFiveStars`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...movieToAdd,
+              rating: 5,
+            }),
+          });
 
           if (ratedResponse.ok) {
             const addedRatedMovie = await ratedResponse.json();
@@ -170,7 +168,7 @@ export const MovieProvider = ({ children }) => {
   // Add a new movie
   const addMovie = async (movie) => {
     try {
-      const response = await fetch("http://localhost:3001/movies", {
+      const response = await fetch(`${API_BASE_URL}/movies`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -194,7 +192,7 @@ export const MovieProvider = ({ children }) => {
   // Delete a movie
   const deleteMovie = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/movies/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/movies/${id}`, {
         method: "DELETE",
       });
 
@@ -230,3 +228,5 @@ export const MovieProvider = ({ children }) => {
     <MovieContext.Provider value={value}>{children}</MovieContext.Provider>
   );
 };
+
+export default MovieProvider;
