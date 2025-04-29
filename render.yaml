@@ -1,0 +1,13 @@
+services services:
+  - type: web
+    name: moviemix-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npx json-server --watch db.json --port 10000
+    envVars:
+      - key: NODE_VERSION
+        value: 22.14.0
+    autoDeploy: true
+    branch: main
+    rootDir: .
