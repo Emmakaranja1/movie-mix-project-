@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../style/Watchlist.css";
+import { API_BASE_URL } from "../services/api";
 
 const Watchlist = () => {
   const [watchlist, setWatchlist] = useState([]);
@@ -10,7 +11,7 @@ const Watchlist = () => {
   useEffect(() => {
     const fetchWatchlist = async () => {
       try {
-        const response = await fetch("http://localhost:3001/watchlist");
+        const response = await fetch(`${API_BASE_URL}/watchlist`);
         if (!response.ok) {
           throw new Error("Failed to fetch watchlist");
         }
@@ -28,7 +29,7 @@ const Watchlist = () => {
 
   const removeFromWatchlist = async (movieId) => {
     try {
-      await fetch(`http://localhost:3001/watchlist/${movieId}`, {
+      await fetch(`${API_BASE_URL}/watchlist/${movieId}`, {
         method: "DELETE",
       });
       setWatchlist(watchlist.filter((movie) => movie.id !== movieId));
