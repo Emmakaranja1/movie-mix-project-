@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useMovies } from "../context/MovieContext";
 import "../style/Moviedetails.css";
 
 const Moviedetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { addToWatchlist } = useMovies();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -31,22 +33,11 @@ const Moviedetails = () => {
   const handleAddToWatchlist = async () => {
     if (!movie) return;
 
-    try {
-      const response = await fetch("http://localhost:3001/watchlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(movie),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add to watchlist");
-      }
-
+    const result = await addToWatchlist(movie);
+    if (result.success) {
       alert("Added to watchlist!");
-    } catch (error) {
-      console.error("Error adding to watchlist:", error);
+    } else {
+      alert(`Error: ${result.message}`);
     }
   };
 

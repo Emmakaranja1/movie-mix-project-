@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMovies } from "../context/MovieContext";
 
-function Searchbar({ setSelectedMovie }) {
+function Searchbar() {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { movies, setSelectedMovie } = useMovies();
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -19,38 +21,22 @@ function Searchbar({ setSelectedMovie }) {
 
     setIsLoading(true);
 
-    // Replace axios with fetch
-    fetch("http://localhost:3001/movies")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((movies) => {
-        // More flexible search that includes partial matches
-        const foundMovies = movies.filter(
-          (movie) =>
-            movie.title &&
-            movie.title.toLowerCase().includes(query.toLowerCase().trim())
-        );
+    // Search directly from the movies in context instead of fetching again
+    const foundMovies = movies.filter(
+      (movie) =>
+        movie.title &&
+        movie.title.toLowerCase().includes(query.toLowerCase().trim())
+    );
 
-        if (foundMovies.length > 0) {
-          // If we found movies, use the first match
-          setSelectedMovie(foundMovies[0]);
-          navigate("/display-search");
-        } else {
-          setSelectedMovie(null);
-          alert("No movies found matching your search.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        alert(`An error occurred: ${error.message}`);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    if (foundMovies.length > 0) {
+      setSelectedMovie(foundMovies[0]);
+      navigate("/display-search");
+    } else {
+      setSelectedMovie(null);
+      alert("No movies found matching your search.");
+    }
+
+    setIsLoading(false);
   };
 
   // Add Enter key support

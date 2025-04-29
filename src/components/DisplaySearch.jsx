@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useMovies } from "../context/MovieContext";
 import "./DisplaySearch.css";
 
-function DisplaySearch({ selectedMovie }) {
+function DisplaySearch() {
   const navigate = useNavigate();
+  const { selectedMovie } = useMovies();
 
   // Redirect if no movie is selected
   useEffect(() => {

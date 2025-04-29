@@ -1,9 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useMovies } from "../context/MovieContext";
 import "../style/AllMovies.css";
 
 
 const AllMovies = () => {
-  const [movies, setMovies] = useState([]);
+  const {
+    movies,
+    loading,
+    error,
+    addMovie,
+    deleteMovie,
+    rateMovie,
+    addToWatchlist,
+  } = useMovies();
+
   const [newMovie, setNewMovie] = useState({
     title: "",
     genre: "",
@@ -11,34 +21,13 @@ const AllMovies = () => {
     image: "",
     description: "",
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch("http://localhost:3001/movies")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch movies");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setMovies(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching movies:", error);
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewMovie({ ...newMovie, [name]: value });
   };
 
-  const handleAddMovie = () => {
+  const handleAddMovie = async () => {
     // Basic validation
     if (
       !newMovie.title ||
@@ -50,112 +39,37 @@ const AllMovies = () => {
       return;
     }
 
-    fetch("http://localhost:3001/movies", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...newMovie, rating: 0 }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to add movie");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setMovies([...movies, data]);
-        setNewMovie({
-          title: "",
-          genre: "",
-          releaseYear: "",
-          image: "",
-          description: "",
-        });
-      })
-      .catch((error) => console.error("Error adding movie:", error));
-  };
-
-  const handleDeleteMovie = (id) => {
-    if (window.confirm("Are you sure you want to delete this movie?")) {
-      fetch(`http://localhost:3001/movies/${id}`, {
-        method: "DELETE",
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to delete movie");
-          }
-          setMovies(movies.filter((movie) => movie.id !== id));
-        })
-        .catch((error) => console.error("Error deleting movie:", error));
+    const result = await addMovie(newMovie);
+    if (result.success) {
+      setNewMovie({
+        title: "",
+        genre: "",
+        releaseYear: "",
+        image: "",
+        description: "",
+      });
+    } else {
+      alert(`Error adding movie: ${result.message}`);
     }
   };
 
-  const handleRateMovie = (id, rating) => {
-    fetch(`http://localhost:3001/movies/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ rating }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to rate movie");
-        }
-        return response.json();
-      })
-      .then(() => {
-        setMovies(
-          movies.map((movie) =>
-            movie.id === id ? { ...movie, rating } : movie
-          )
-        );
-
-        // If rated 5 stars, add to rated-five-stars list
-        if (rating === 5) {
-          const movieToAdd = movies.find((m) => m.id === id);
-          if (movieToAdd) {
-            fetch("http://localhost:3001/ratedFiveStars", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                ...movieToAdd,
-                rating: 5,
-                userRating: 5,
-              }),
-            })
-              .then((response) => {
-                if (response.ok) {
-                  console.log("Added to 5-star rated list");
-                }
-              })
-              .catch((error) =>
-                console.error("Error adding to 5-star list:", error)
-              );
-          }
-        }
-      })
-      .catch((error) => console.error("Error rating movie:", error));
+  const handleDeleteMovie = async (id) => {
+    if (window.confirm("Are you sure you want to delete this movie?")) {
+      await deleteMovie(id);
+    }
   };
 
-  const handleLikeMovie = (movie) => {
-    fetch("http://localhost:3001/watchlist", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(movie),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to add movie to watchlist");
-        }
-        alert(`"${movie.title}" added to your watchlist!`);
-      })
-      .catch((error) => console.error("Error adding to watchlist:", error));
+  const handleRateMovie = async (id, rating) => {
+    await rateMovie(id, rating);
+  };
+
+  const handleLikeMovie = async (movie) => {
+    const result = await addToWatchlist(movie);
+    if (result.success) {
+      alert(`"${movie.title}" added to your watchlist!`);
+    } else {
+      alert(`Error: ${result.message}`);
+    }
   };
 
   if (loading) return <div className="loading-container">Loading...</div>;
