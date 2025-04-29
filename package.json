@@ -1,82 +1,32 @@
 {
-  
   "name": "moviemix",
-  
   "private": true,
-  
   "version": "0.0.0",
-  
   "type": "module",
-  
   "scripts": {
-  
-    
-  "dev": "concurrently \"vite\" \"npm run json-server\"",
-  
-    
-  "build": "vite build",
-  
-    
-  "lint": "eslint .",
-  
-    
-  "preview": "vite preview",
-  
-    
-  "json-server": "json-server --watch db.json --port 3001"
-  
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "json-server": "json-server --watch db.json --port 3001"
   },
-  
   "dependencies": {
-  
-    
-  "axios": "^1.9.0",
-  
-    
-  "react": "^19.0.0",
-  
-    
-  "react-dom": "^19.0.0",
-  
-    
-  "react-router-dom": "^6.30.0"
-  
+    "axios": "^1.9.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^6.30.0"
   },
-  
   "devDependencies": {
-  
-    
-  "@eslint/js": "^9.22.0",
-  
-    
-  "@types/react": "^19.0.10",
-  
-    
-  "@types/react-dom": "^19.0.4",
-  
-    
-  "@vitejs/plugin-react": "^4.3.4",
-  
-    
-  "concurrently": "^9.1.2",
-  
-    
-  "eslint": "^9.22.0",
-  
-    
-  "eslint-plugin-react-hooks": "^5.2.0",
-  
-    
-  "eslint-plugin-react-refresh": "^0.4.19",
-  
-    
-  "globals": "^16.0.0",
-  
-    
-  "json-server": "^1.0.0-beta.3",
-  
-    
-  "vite": "^6.3.1"
-  
+    "@eslint/js": "^9.22.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.22.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "json-server": "^1.0.0-beta.3",
+    "vite": "^6.3.1"
   }
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../style/RatedFiveStars.css";
+import { API_BASE_URL } from "../services/api";
 
 const RatedFiveStars = () => {
   const [ratedMovies, setRatedMovies] = useState([]);
@@ -10,7 +11,7 @@ const RatedFiveStars = () => {
   useEffect(() => {
     const fetchRatedMovies = async () => {
       try {
-        const response = await fetch("http://localhost:3001/ratedFiveStars");
+        const response = await fetch(`${API_BASE_URL}/ratedFiveStars`);
         if (!response.ok) {
           throw new Error("Failed to fetch rated movies");
         }
@@ -33,14 +34,14 @@ const RatedFiveStars = () => {
   const removeRatedMovie = async (id) => {
     try {
       // Find all instances of this movie in the ratedFiveStars endpoint
-      const response = await fetch("http://localhost:3001/ratedFiveStars");
+      const response = await fetch(`${API_BASE_URL}/ratedFiveStars`);
       const allRated = await response.json();
 
       const toRemove = allRated.filter((m) => m.id === id);
 
       // Delete each instance
       for (const movie of toRemove) {
-        await fetch(`http://localhost:3001/ratedFiveStars/${movie.id}`, {
+        await fetch(`${API_BASE_URL}/ratedFiveStars/${movie.id}`, {
           method: "DELETE",
         });
       }

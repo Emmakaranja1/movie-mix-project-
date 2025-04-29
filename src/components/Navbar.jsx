@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import "../style/Navbar.css";
 import Searchbar from "./Searchbar.jsx";
 
 // Accept setSelectedMovie as prop

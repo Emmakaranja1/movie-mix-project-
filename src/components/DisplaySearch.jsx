@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useMovies } from "../context/MovieContext";
-import "./DisplaySearch.css";
+import "../style/DisplaySearch.css";
 
 function DisplaySearch() {
   const navigate = useNavigate();
