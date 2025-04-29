@@ -5,7 +5,6 @@
       "title": "Inception",
       "genre": "Thriller",
       "releaseYear": "2010",
-
       "image": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
       "rating": 5
     },
@@ -263,7 +262,6 @@
       "genre": "Mystery",
       "releaseYear": "2022",
       "image": "https://image.tmdb.org/t/p/w500/vDGr1YdrlfbU9wxTOdpf3zChmv9.jpg",
-
       "rating": 5
     }
   ],
@@ -281,15 +279,21 @@
   ],
   "watchlist": [
     {
-
       "id": "37",
       "title": "Nope",
       "genre": "Horror",
       "releaseYear": "2022",
       "image": "https://image.tmdb.org/t/p/w500/AcKVlWaNVVVFQwro3nLXqPljcYA.jpg",
       "rating": 5
+    },
+    {
+      "id": "9",
+      "title": "Black Panther: Wakanda Forever",
+      "genre": "Action",
+      "releaseYear": "2022",
+      "image": "https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg",
+      "rating": 5
     }
   ],
   "ratedFiveStars": []
-
 }
