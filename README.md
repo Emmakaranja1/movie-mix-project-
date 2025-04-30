@@ -83,3 +83,12 @@ Styling – User-friendly, responsive design.
 
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+slides link
+https://docs.google.com/presentation/d/1RlHKHUS8QFbm-6EKdEi8pA4kyHWwqyfY5SP_z1hgsFY/edit?usp=sharing
+
+vercel frontend link
+https://movie-mix-project.vercel.app/
+
+vercel mockApi link
+https://moviemix-mock-api.onrender.com/

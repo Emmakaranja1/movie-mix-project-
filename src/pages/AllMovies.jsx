@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMovies } from "../context/MovieContext";
 import "../style/AllMovies.css";
 
+
 const AllMovies = () => {
   const {
     movies,
