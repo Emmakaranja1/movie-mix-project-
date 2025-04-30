@@ -1,7 +1,6 @@
-// Central API configuration
 export const API_BASE_URL = "https://moviemix-mock-api.onrender.com";
 
-// Helper function for API requests with error handling
+// Helper functions for API calls
 export const fetchFromAPI = async (endpoint, options = {}) => {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
@@ -10,10 +9,35 @@ export const fetchFromAPI = async (endpoint, options = {}) => {
       throw new Error(`API Error: ${response.status}`);
     }
 
-    const data = await response.json();
-    return { success: true, data };
+    return await response.json();
   } catch (error) {
     console.error(`API Request Failed: ${error.message}`);
-    return { success: false, error: error.message };
+    throw error;
   }
+};
+
+export const postToAPI = async (endpoint, data) => {
+  return fetchFromAPI(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+export const updateAPI = async (endpoint, data) => {
+  return fetchFromAPI(endpoint, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+export const deleteFromAPI = async (endpoint) => {
+  return fetchFromAPI(endpoint, {
+    method: "DELETE",
+  });
 };

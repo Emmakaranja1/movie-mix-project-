@@ -1,68 +1,173 @@
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #1f2937; 
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    
-  }
-  
-  
-  .logo img {
-    height: 40px;
-  }
-  
-  
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-  }
-  
-  .nav-links li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-links li:hover {
-    color: #facc15; 
-  }
-  
-  .nav-links img {
-    height: 20px;
-  }
-  .search-bar {
-    display: flex;
-    align-items: center;
-    
-    padding: 2rem 4rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  
-  
-  .search-bar input {
-    background: transparent;
-    border: none;
-    color: white;
-    outline: none;
-    font-size: 0.9rem;
-    width: 160px;
-  }
-  
-  .search-bar input::placeholder {
-    color: #9ca3af;
-  }
-  
-  .search-bar img {
-    height: 30px;
-    opacity: 50;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1f2937;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo img {
+  height: 40px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-links li:hover {
+  color: #facc15;
+}
+
+.nav-links img {
+  height: 20px;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+
+  padding: 2rem 4rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  font-size: 0.9rem;
+  width: 160px;
+}
+
+.search-bar input::placeholder {
+  color: #9ca3af;
+}
+
+.search-bar img {
+  height: 30px;
+  opacity: 50;
+}
+/* Add to your existing Navbar.css file */
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+.profile-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+  object-fit: cover;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: var(--card-background, #1f1f1f);
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  z-index: 1000;
+  padding: 10px 0;
+  margin-top: 5px;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--text-color, #ffffff);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 5px 0;
+}
+
+.auth-links {
+  display: flex;
+  align-items: center;
+}
+
+.login-btn,
+.signup-btn {
+  padding: 8px 16px;
+  margin-left: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.login-btn {
+  background-color: transparent;
+  border: 1px solid var(--primary-color, #e50914);
+  color: var(--primary-color, #e50914);
+}
+
+.signup-btn {
+  background-color: var(--primary-color, #e50914);
+  border: 1px solid var(--primary-color, #e50914);
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: rgba(229, 9, 20, 0.2);
+}
+
+.signup-btn:hover {
+  background-color: #f40612;
+}
+.avatar.initials-avatar {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color, #e50914);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
