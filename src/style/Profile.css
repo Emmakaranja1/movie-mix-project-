@@ -57,6 +57,20 @@
   border: 3px solid var(--primary-color, #e50914);
 }
 
+.initials-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color, #e50914);
+  color: white;
+  font-size: 60px;
+  font-weight: bold;
+  border: 3px solid var(--primary-color, #e50914);
+}
+
 .profile-info {
   flex: 1;
 }

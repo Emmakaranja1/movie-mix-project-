@@ -17,6 +17,17 @@ const Profile = () => {
   const [message, setMessage] = useState({ text: "", type: "" });
   const navigate = useNavigate();
 
+  // Helper function to get user's initials
+  const getInitials = (name) => {
+    if (!name) return "?";
+    return name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase()
+      .substring(0, 2);
+  };
+
   // Update form data when user changes
   useEffect(() => {
     if (user) {
@@ -118,7 +129,7 @@ const Profile = () => {
                 onChange={handleInputChange}
                 placeholder="https://example.com/profile.jpg"
               />
-              <small>Enter a valid image URL</small>
+              <small>Leave blank to use initials as avatar</small>
             </div>
 
             <div className="form-group">
@@ -158,10 +169,13 @@ const Profile = () => {
           <div className="profile-details">
             <div className="profile-header">
               <div className="profile-picture">
-                <img
-                  src={user.profilePicture || "https://via.placeholder.com/150"}
-                  alt={user.name}
-                />
+                {user.profilePicture ? (
+                  <img src={user.profilePicture} alt={user.name} />
+                ) : (
+                  <div className="initials-avatar">
+                    {getInitials(user.name)}
+                  </div>
+                )}
               </div>
               <div className="profile-info">
                 <h2>{user.name}</h2>

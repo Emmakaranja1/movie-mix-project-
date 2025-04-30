@@ -6,7 +6,7 @@ import Homepage from "./pages/Homepage.jsx";
 import AllMovies from "./pages/AllMovies.jsx";
 import Watchlist from "./pages/Watchlist.jsx";
 import RatedFiveStars from "./pages/RatedFiveStars.jsx";
-import DisplaySearch from "./components/DisplaySearch.jsx";
+import DisplaySearch from "./pages/DisplaySearch.jsx";
 import Moviedetails from "./components/Moviedetails.jsx";
 import Profile from "./components/Profile.jsx";
 import Login from "./components/Login.jsx";

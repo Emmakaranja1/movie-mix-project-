@@ -9,6 +9,17 @@ function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
+  // Helper function to get user's initials
+  const getInitials = (name) => {
+    if (!name) return "?";
+    return name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase()
+      .substring(0, 2);
+  };
+
   const handleLogout = () => {
     logout();
     setShowDropdown(false);
@@ -59,11 +70,17 @@ function Navbar() {
               className="profile-button"
               onClick={() => setShowDropdown(!showDropdown)}
             >
-              <img
-                src={user.profilePicture || "https://via.placeholder.com/40"}
-                alt={user.name || "User"}
-                className="avatar"
-              />
+              {user.profilePicture ? (
+                <img
+                  src={user.profilePicture}
+                  alt={user.name || "User"}
+                  className="avatar"
+                />
+              ) : (
+                <div className="avatar initials-avatar">
+                  {getInitials(user.name)}
+                </div>
+              )}
               <span>{user.name || "User"}</span>
             </div>
 

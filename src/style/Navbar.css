@@ -160,3 +160,14 @@ nav {
 .signup-btn:hover {
   background-color: #f40612;
 }
+.avatar.initials-avatar {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color, #e50914);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
